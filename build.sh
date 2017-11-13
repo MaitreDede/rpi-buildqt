@@ -79,4 +79,4 @@ docker run -it --rm --privileged --workdir ${DOCKER_BUILD_SCRIPTS} \
     --volume ${DOCKER_BUILD_SCRIPTS_SRC}:${DOCKER_BUILD_SCRIPTS} \
     --volume ${BUILD_WORKDIR_SRC}:${BUILD_WORKDIR} \
     --env BUILD_WORKDIR=${BUILD_WORKDIR} \
-    "${DOCKER_TAG}" # "build.sh"
+    "${DOCKER_TAG}" "build.sh"
