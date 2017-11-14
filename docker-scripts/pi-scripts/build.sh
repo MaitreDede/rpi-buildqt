@@ -45,14 +45,10 @@ fi
 # Recommends: antiword, graphviz, ghostscript, postgresql, python-gevent, poppler-utils
 export DEBIAN_FRONTEND=noninteractive
 
-
 echo Update/Upgrade
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
-
-echo Install required packages
-sudo apt-get install git build-essential rsync jq pigpio curl libunwind8 gettext
 
 echo Configuring...
 # Memory split
@@ -62,14 +58,30 @@ set_config_var gpu_mem 256
 systemctl daemon-reload
 systemctl enable ssh
 
+echo Install required packages
+sudo apt-get install -y git build-essential rsync jq pigpio curl libunwind8 gettext
+
 # qtbase
-sudo apt-get install libboost1.55-all-dev libudev-dev libinput-dev libts-dev libmtdev-dev libjpeg-dev libfontconfig1-dev libssl-dev libdbus-1-dev libglib2.0-dev libxkbcommon-dev
-
+PACKAGES=libboost1.55-all-dev libudev-dev libinput-dev libts-dev libmtdev-dev libjpeg-dev libfontconfig1-dev libssl-dev libdbus-1-dev libglib2.0-dev libxkbcommon-dev
 # qtmultimedia
-sudo apt-get install libasound2-dev libpulse-dev gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-
+PACKAGES+= libasound2-dev libpulse-dev gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 # qtwebengine
-sudo apt-get install libvpx-dev libsrtp0-dev libsnappy-dev libnss3-dev
-
+PACKAGES+= libvpx-dev libsrtp0-dev libsnappy-dev libnss3-dev
 # piomxtextures
-sudo apt-get install libssh-dev libsmbclient-dev libv4l-dev libbz2-dev
+PACKAGES+= libssh-dev libsmbclient-dev libv4l-dev libbz2-dev
+
+# # qtbase
+# sudo apt-get install -y libboost1.55-all-dev libudev-dev libinput-dev libts-dev libmtdev-dev libjpeg-dev libfontconfig1-dev libssl-dev libdbus-1-dev libglib2.0-dev libxkbcommon-dev
+
+# # qtmultimedia
+# sudo apt-get install -y libasound2-dev libpulse-dev gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+
+# # qtwebengine
+# sudo apt-get install -y libvpx-dev libsrtp0-dev libsnappy-dev libnss3-dev
+
+# # piomxtextures
+# sudo apt-get install -y libssh-dev libsmbclient-dev libv4l-dev libbz2-dev
+
+sudo apt-get install -y ${PACKAGES}
+
+sudo reboot

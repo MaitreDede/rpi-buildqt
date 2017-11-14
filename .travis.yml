@@ -13,5 +13,6 @@ before_install:
 - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   install docker-engine realpath
 - docker --version
+- docker pull maitredede/ubuntu-xenial-qemu
 script:
 - "./build.sh"

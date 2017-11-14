@@ -64,15 +64,15 @@ fi
 #########################################################
 # Prepare docker build
 if [[ "$(docker images -q ${DOCKER_TAG} 2> /dev/null)" == "" ]]; then
-    docker build . --tag=${DOCKER_TAG}
+    docker build . --tag=${DOCKER_TAG} --file=Dockerfile.prebuilt
 fi
 
 #########################################################
 # Launch docker build
 echo docker run -it --rm --privileged --workdir ${DOCKER_BUILD_SCRIPTS} \
     --volume ${DOCKER_BUILD_SCRIPTS_SRC}:${DOCKER_BUILD_SCRIPTS} \
-    --volume ${BUILD_WORKDIR}:${BUILD_WORKDIR} \
-    --env BUILD_WORKDIR \
+    --volume ${BUILD_WORKDIR_SRC}:${BUILD_WORKDIR} \
+    --env BUILD_WORKDIR=${BUILD_WORKDIR} \
     "${DOCKER_TAG}" "build.sh"
 
 docker run -it --rm --privileged --workdir ${DOCKER_BUILD_SCRIPTS} \

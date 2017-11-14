@@ -4,10 +4,9 @@ RUN sed -i 's/^#\s*\(deb.*\)$/\1/g' /etc/apt/sources.list && \
     sed -i 's/^#\s*\(deb-src.*\)$/\1/g' /etc/apt/sources.list
 # update/upgrade
 RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get dist-upgrade -y && \
-    apt-get install -y kpartx zerofree rsync build-essential wget apt-utils flex bison unzip expect sshpass git pkg-config re2c gperf ninja python ruby gcc-multilib g++-multilib && \
-    apt-get build-dep -y qemu-system-arm && \
+    apt-get install -y aptitude && \
+    aptitude install -y kpartx zerofree rsync build-essential wget apt-utils flex bison unzip expect sshpass git pkg-config re2c gperf ninja python ruby gcc-multilib g++-multilib && \
+    aptitude build-dep -y qemu-system-arm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # download qemu
@@ -21,5 +20,4 @@ RUN tar xJf qemu-2.10.1.tar.xz --strip-components=1 --overwrite && \
     qemu-system-arm --version && \
     qemu-system-arm --machine help
 RUN rm -Rf /root/qemu
-
 ENTRYPOINT [ "bash" ]

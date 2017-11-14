@@ -1,0 +1,6 @@
+FROM maitredede/ubuntu-xenial-qemu
+RUN apt-get update && \
+    apt-get install -y kpartx zerofree rsync build-essential wget apt-utils flex bison unzip expect sshpass git pkg-config re2c gperf ninja python ruby gcc-multilib g++-multilib && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+ENTRYPOINT [ "bash" ]
