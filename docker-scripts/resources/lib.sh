@@ -6,7 +6,6 @@ set -o pipefail
 
 BUILD_WORKDIR=$BUILD_WORKDIR
 
-SCRIPTDIR=$(dirname "$0")
 QEMU_KERNEL=${BUILD_WORKDIR}/kernel-qemu
 QEMU_CPU=arm1176
 QEMU_MACHINE=versatilepb
@@ -18,20 +17,6 @@ IMAGE_DEST_ZIP=${BUILD_WORKDIR}/raspbian-target.zip
 MOUNT_POINT=/pi-root-mount
 
 PI_SCRIPTS=${SCRIPTDIR}/pi-scripts
-
-mount_image_rw() {
-    mount --read-write "${LOOP_MAPPER_PATH}" "${MOUNT_POINT}"
-    sleep 2
-}
-mount_image_ro() {
-    mount --read-only "${LOOP_MAPPER_PATH}" "${MOUNT_POINT}"
-    sleep 2
-}
-
-unmount_image() {
-    sync
-    umount "${MOUNT_POINT}"
-}
 
 initialize_image() {
     echo Copying pristine ${IMAGE_PRISTINE} to ${IMAGE_DEST}
@@ -59,6 +44,20 @@ initialize_image() {
     e2fsck -f "${LOOP_MAPPER_PATH}"
     resize2fs "${LOOP_MAPPER_PATH}"
     mkdir -p "${MOUNT_POINT}"
+}
+
+mount_image_rw() {
+    mount --read-write "${LOOP_MAPPER_PATH}" "${MOUNT_POINT}"
+    sleep 2
+}
+mount_image_ro() {
+    mount --read-only "${LOOP_MAPPER_PATH}" "${MOUNT_POINT}"
+    sleep 2
+}
+
+unmount_image() {
+    sync
+    umount "${MOUNT_POINT}"
 }
 
 launch_emulation() {

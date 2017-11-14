@@ -4,9 +4,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-SCRIPTDIR=$(dirname "$0")
-BUILD_WORKDIR_SRC=~/raspi-qt
-BUILD_WORKDIR=/raspi-qt
+echo "Build hello from root"
+
+SCRIPTDIR=$(realpath $(dirname "$0"))
+BUILD_WORKDIR_SRC=$(realpath ~/raspi-qt)
+BUILD_WORKDIR=$(realpath /raspi-qt)
 
 QEMU_KERNEL_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.4.13-jessie"
 QEMU_KERNEL=${BUILD_WORKDIR_SRC}/kernel-qemu

@@ -4,10 +4,15 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+echo "Build hello from docker"
+
+SCRIPTDIR=$(realpath $(dirname "$0"))
+
 source ${SCRIPTDIR}/resources/lib.sh
 
 echo ================================================
 echo == Preparing image for direct updates...
+initialize_image
 mount_image_rw
 
 echo ================================================
@@ -27,6 +32,9 @@ echo == Unmounting image
 unmount_image
 
 launch_emulation
+
+echo ================================================
+echo == Building application
 
 source ${SCRIPTDIR}/build-app.sh
 
