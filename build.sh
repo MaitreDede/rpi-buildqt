@@ -16,10 +16,10 @@ QEMU_KERNEL=${BUILD_WORKDIR_SRC}/kernel-qemu
 IMAGE_SOURCE="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-09-08/2017-09-07-raspbian-stretch-lite.zip"
 IMAGE_TMP=/tmp/raspbian.zip
 IMAGE_PRISTINE=${BUILD_WORKDIR_SRC}/raspbian-stretch-lite-pristine.img
-# IMAGE_DEST=${BUILD_WORKDIR}/raspbian-target.img
+IMAGE_DEST=${BUILD_WORKDIR}/raspbian-target.img
 # IMAGE_DEST_ZIP=${BUILD_WORKDIR}/raspbian-target.zip
 
-DOCKER_BUILD_SCRIPTS_SRC=${SCRIPTDIR}
+DOCKER_BUILD_SCRIPTS_SRC=${SCRIPTDIR}/docker-scripts
 DOCKER_BUILD_SCRIPTS=/docker-scripts
 
 DOCKER_TAG="raspi-qt"
@@ -89,3 +89,5 @@ docker run -it --rm --privileged --workdir ${DOCKER_BUILD_SCRIPTS} \
     --volume ${BUILD_WORKDIR_SRC}:${BUILD_WORKDIR} \
     --env BUILD_WORKDIR=${BUILD_WORKDIR} \
     "${DOCKER_TAG}" "build.sh"
+
+echo Image ready at ${IMAGE_DEST}
