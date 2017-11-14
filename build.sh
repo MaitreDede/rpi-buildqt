@@ -7,8 +7,8 @@ set -o pipefail
 echo "Build hello from root"
 
 SCRIPTDIR=$(realpath $(dirname "$0"))
-BUILD_WORKDIR_SRC=$(realpath ~/raspi-qt)
-BUILD_WORKDIR=$(realpath /raspi-qt)
+BUILD_WORKDIR_SRC=~/raspi-qt
+BUILD_WORKDIR=/raspi-qt
 
 QEMU_KERNEL_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.4.13-jessie"
 QEMU_KERNEL=${BUILD_WORKDIR_SRC}/kernel-qemu
@@ -19,7 +19,7 @@ IMAGE_PRISTINE=${BUILD_WORKDIR_SRC}/raspbian-stretch-lite-pristine.img
 # IMAGE_DEST=${BUILD_WORKDIR}/raspbian-target.img
 # IMAGE_DEST_ZIP=${BUILD_WORKDIR}/raspbian-target.zip
 
-DOCKER_BUILD_SCRIPTS_SRC=$(realpath ${SCRIPTDIR}/docker-scripts)
+DOCKER_BUILD_SCRIPTS_SRC=${SCRIPTDIR}
 DOCKER_BUILD_SCRIPTS=/docker-scripts
 
 DOCKER_TAG="raspi-qt"
