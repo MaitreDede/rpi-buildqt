@@ -5,7 +5,7 @@ RUN sed -i 's/^#\s*\(deb.*\)$/\1/g' /etc/apt/sources.list && \
 # update/upgrade
 RUN apt-get update && \
     apt-get install -y aptitude && \
-    aptitude install -y kpartx zerofree rsync build-essential wget apt-utils flex bison unzip expect sshpass git pkg-config re2c gperf ninja python ruby gcc-multilib g++-multilib && \
+    aptitude install -y kpartx zerofree rsync build-essential wget apt-utils flex bison unzip expect sshpass git pkg-config re2c gperf ninja python ruby gcc-multilib g++-multilib jq && \
     aptitude build-dep -y qemu-system-arm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
